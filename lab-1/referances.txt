@@ -1,0 +1,4 @@
+https://github.com/ELabbassalah56/EEE481_LAB1
+https://github.com/MahmoudFawzyAOE2/Digital-Communications-Lab/tree/main
+https://github.com/alisheta1998/Basics-of-BER-Bit-Error-Rate-calculations-and-channel-models/tree/main
+https://github.com/zimazz/Lab1_BER
