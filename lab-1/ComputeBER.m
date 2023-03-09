@@ -10,13 +10,13 @@ function BER = ComputeBER(bit_seq,rec_bit_seq)
 % BER
 
 %%% WRITE YOUR CODE HERE
-count=0;
+FalseBit=0;
 for x=1:length(bit_seq)
     if (rec_bit_seq(x) ~= bit_seq(x))
-        count=count+1;
+        FalseBit=FalseBit+1;
     else 
-        count =count+0;
+        FalseBit =FalseBit+0;
     end
 end
-BER= count / (length(bit_seq));
+BER= FalseBit / (length(bit_seq));
 %%%

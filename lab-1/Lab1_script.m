@@ -42,9 +42,9 @@ end
 %%%
 figure
 plot(p_vect, BER_case_1_vec);
-xlabel('p values');
-ylabel('BER');
-title('BER versus channel parameter p');
+xlabel('p values','FontName','Times New Roman','FontSize',16);
+ylabel('BER','FontName','Times New Roman','FontSize',16);
+title('BER versus channel parameter p','FontName','Times New Roman','FontSize',16);
 
 %% Part 2: BER for simple bit-flipping channel with multiple samples
 
@@ -80,6 +80,11 @@ for p_ind = 1:length(p_vect)
     BER_case_2_vec(p_ind) = ComputeBER(bit_seq,rec_bit_seq);
 end
 %%%
+figure
+plot(p_vect, BER_case_2_vec);
+xlabel('p values','FontName','Times New Roman','FontSize',16);
+ylabel('BER','FontName','Times New Roman','FontSize',16);
+title('BER versus channel parameter p','FontName','Times New Roman','FontSize',16);
 
 %% Part 3: BER for simple bit-flipping channel with multiple samples and correlated channel
 
