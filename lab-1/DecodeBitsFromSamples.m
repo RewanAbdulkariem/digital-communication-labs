@@ -19,8 +19,8 @@ switch case_type
     
     case 'part_1'
         %%% WRITE YOUR CODE FOR PART 1 HERE
-        rec_bit_seq=rec_sample_seq;
-        %the input samples is the same  as output as the transmitter does
+        %%% Receiver design: simple flip-and-compare approach
+        rec_bit_seq = xor(rec_sample_seq, rand(size(rec_sample_seq)) < fs);
         %nothing. there is no change.
         %%%
     case 'part_2'
