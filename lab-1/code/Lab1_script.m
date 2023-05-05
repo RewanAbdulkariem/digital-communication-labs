@@ -108,12 +108,19 @@ BER_case_3 = ComputeBER(bit_seq,rec_bit_seq);  % Calculate the bit error rate
 % parameter p
 
 p_vect          = 0:0.1:1;              % Use this vector to extract different values of p in your code
+% start:step:end (0 0.1 0.2 0.3 0.4 0.5 0.6 0.7 0.8 0.9 1)
 BER_case_3_vec  = zeros(size(p_vect));  % Use this vector to store the resultant BER
 
 %%% WRITE YOUR CODE HERE
-for p_ind = 1:length(p_vect)
+for p_ind = 1:length(p_vect) % for start:end
     rec_sample_seq = BSC(sample_seq,fs,p_vect(p_ind),'correlated');
+    % BSC :takes the sample sequence passing through the channel, and
+    % generates the output sample sequence based on the specified channel type
+    % and parameters
     rec_bit_seq = DecodeBitsFromSamples(rec_sample_seq,'part_3',fs);
+    %DecodeBitsFromSamples :takes the sample sequence after passing through the
+    % channel, and decodes from it the sequence of bits based on the considered
+    % case and the sampling frequence (downsample)
     BER_case_3_vec(p_ind) = ComputeBER(bit_seq,rec_bit_seq);
 end
 %%%
@@ -134,5 +141,18 @@ legend('Part 1-a','Part 2-a','Part 3-a','fontsize',10)
 % There is no template code for this part. Please write your own complete
 % code here. You can re-use any of the codes in the previous parts
 
-
 %%% WRITE YOUR CODE HERE
+fs_vect= 0:2:20;  
+BER_vect  = zeros(size(fs_vect));  
+for fs_ind = 1:length(fs_vect)
+    bit_seq_4 = GenerateBits(N_bits); % Generate a sequence of bits equal to the total number of bits
+    sample_seq_4 = GenerateSamples(bit_seq_4,fs_ind); % IMPLEMENT THIS: Generate a sequence of samples for each bit
+    rec_sample_seq_4 = BSC(sample_seq_4,fs_ind,p);   % Generate the received samples after passing through the bit flipping channel
+    rec_bit_seq_4 = DecodeBitsFromSamples(rec_sample_seq_4,'part_2',fs_ind);    % IMPLEMENT THIS: Decode the received bits
+    BER_vect(fs_ind) = ComputeBER(bit_seq_4,rec_bit_seq_4);   % Calculate the bit error rate
+
+end
+figure; plot(BER_case_2_4);
+xlabel('Values of fs','fontsize',10)
+ylabel('BER','fontsize',10)
+

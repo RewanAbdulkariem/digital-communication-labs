@@ -19,9 +19,12 @@ switch case_type
     
     case 'part_1'
         %%% WRITE YOUR CODE FOR PART 1 HERE
-        %%% Receiver design: simple flip-and-compare approach
-        rec_bit_seq = xor(rec_sample_seq, rand(size(rec_sample_seq)) >= fs);
-        %%%
+        if (f<=0.5)
+        rec_bit_seq = rec_sample_seq;
+        else
+        rec_bit_seq =~rec_sample_seq;
+        end      
+        % p=0.2 so pass the sequence without change 
     case 'part_2'
         %%% WRITE YOUR CODE FOR PART 2 HERE
         rec_bit_seq = zeros(1,length(rec_sample_seq)/fs); % initialize output
@@ -35,6 +38,6 @@ switch case_type
         %%%
     case 'part_3'
         %%% WRITE YOUR CODE FOR PART 3 HERE
-        
+        rec_bit_seq = downsample(rec_sample_seq, fs);
         %%%
 end

@@ -28,7 +28,7 @@ end
 switch channel_type
     
     case 'independent'
-        channel_effect = rand(size(rec_sample_seq))<=p;
+        channel_effect = rand(size(rec_sample_seq))<=p; %result 1 if rec_sample_seq
     case 'correlated'
         % generates a random binary vector of length length(rec_sample_seq)/fs 
         %(which is the number of bits per sample), where each element has a 

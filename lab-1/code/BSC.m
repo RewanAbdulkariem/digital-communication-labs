@@ -1,0 +1,46 @@
+function rec_sample_seq  = BSC(sample_seq,fs,p,channel_type)
+%
+% Inputs:
+%   sample_seq:     The input sample sequence to the channel
+%   fs:             The sampling frequency used to generate the sample sequence
+%   p:              The bit flipping probability
+%   channel_type:   The type of channel, 'independent' or 'correlated'
+% Outputs:
+%   rec_sample_seq: The sequence of sample sequence after passing through the channel
+%
+% This function takes the sample sequence passing through the channel, and
+% generates the output sample sequence based on the specified channel type
+% and parameters
+
+sample_seq      = ~~sample_seq; % convert to binary value
+rec_sample_seq  = zeros(size(sample_seq));
+rec_sample_seq  = ~~rec_sample_seq;
+
+% nargin is a MATLAB built-in variable that represents the number of input arguments 
+%passed to a function.this line checks whether the number of input arguments is less than or equal to 3. 
+%If this is true, it means that the optional argument channel_type was not passed to the function,
+%and its default value of 'independent' will be used instead
+
+if (nargin <= 3)
+    channel_type = 'independent';
+end
+
+switch channel_type
+    
+    case 'independent'
+        channel_effect = rand(size(rec_sample_seq))<=p; %result 1 if rand < (p=0.2)(flipping probability) 
+    case 'correlated'
+        % generates a random binary vector of length length(rec_sample_seq)/fs 
+        %(which is the number of bits per sample), where each element has a 
+        % probability p of being set to 1 (flipped).
+        channel_effect = rand(1,length(rec_sample_seq)/fs)<=p;
+        %replicates this vector fs times vertically to create a matrix of size 
+        %(fs,length(rec_sample_seq)/fs) where each row is the same as the original vector.
+        channel_effect = repmat(channel_effect,fs,1);
+        %reshapes the matrix into a row vector of length length(rec_sample_seq) by concatenating
+        %all the rows into a single row vector.
+        channel_effect = channel_effect(:)';
+end
+
+rec_sample_seq = xor(sample_seq,channel_effect); % used to simulate the effect of a binary symmetric channel (BSC) on a binary input sequence sample_seq.
+rec_sample_seq = rec_sample_seq + 0; % used to convert the logical values to double precision values (0 for false and 1 for true) 
